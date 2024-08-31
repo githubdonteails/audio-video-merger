@@ -32,3 +32,5 @@ jobs:
           prerelease: ${{ contains(github.ref, 'beta') }}
           files: |
             dist/**/**.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
