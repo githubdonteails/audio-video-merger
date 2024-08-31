@@ -10,7 +10,7 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "biome lint ./src",
-    "test": "TEST=true wdio run ./wdio.conf.ts",
+    "test": "wdio run ./wdio.conf.ts",
     "wdio": "wdio run ./wdio.conf.ts"
   },
   "keywords": [],
