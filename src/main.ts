@@ -272,7 +272,9 @@ ipcMain.on("merge", async (event, input: ProcessFilesRequest) => {
 
   for (const current of processChain) {
     await processVideo(current, bytesProcessed, totalBytes, event).catch(
-      result.errors.push,
+      (error) => {
+        result.errors.push(error);
+      }
     );
     bytesProcessed += current.bytes;
     result.processed++;
