@@ -40,11 +40,15 @@ jobs:
       - name: Test
         run: npm test
 
+      - name: List Generated Files
+        run: ls -R ./out/make
+
       - name: Upload build files
         uses: actions/upload-artifact@v4
         with:
           name: zip-${{ matrix.os }}-${{ matrix.arch }}
           path: |
-            ./out/make/zip/*/${{ matrix.arch }}/*.zip
+            ./out/make/zip/darwin/${{ matrix.arch }}/*.zip
+            ./out/make/squirrel.windows/${{ matrix.arch }}/*.zip
           compression-level: 0
 
