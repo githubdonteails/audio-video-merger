@@ -45,7 +45,6 @@ jobs:
         with:
           name: zip-${{ matrix.os }}-${{ matrix.arch }}
           path: |
-            ./out/make/zip/darwin/${{ matrix.arch }}/*.zip
-            ./out/make/zip/win32/${{ matrix.arch }}/*.zip
+            ./out/make/zip/*/${{ matrix.arch }}/*.zip
           compression-level: 0
 
