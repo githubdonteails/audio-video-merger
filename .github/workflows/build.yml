@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-latest]
+        os: [macos-latest, windows-latest]
         arch: [x64, arm64]
 
     steps:
@@ -40,7 +40,9 @@ jobs:
       - name: Upload build files
         uses: actions/upload-artifact@v4
         with:
-          name: zip-${{ matrix.arch }}
-          path: ./out/make/zip/darwin/${{ matrix.arch }}/*.zip
+          name: zip-${{ matrix.os }}-${{ matrix.arch }}
+          path: |
+            ./out/make/zip/darwin/${{ matrix.arch }}/*.zip
+            ./out/make/zip/win32/${{ matrix.arch }}/*.zip
           compression-level: 0
 
