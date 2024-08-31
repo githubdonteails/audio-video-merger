@@ -34,5 +34,3 @@ jobs:
             dist/zip-macos-latest-arm64/darwin/arm64/*.zip
             dist/zip-macos-latest-x64/darwin/x64/*.zip
             dist/zip-windows-latest-x64/win32/x64/*.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
