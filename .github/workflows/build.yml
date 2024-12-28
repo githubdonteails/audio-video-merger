@@ -47,7 +47,7 @@ jobs:
       - name: Ad-Hoc Sign macOS Application
         if: matrix.os == 'macos-latest'
         run: |
-          for app in ./out/make/zip/darwin/${{ matrix.arch }}/*.app; do
+          for app in ./out/make/darwin/${{ matrix.arch }}/*.app; do
             echo "Signing $app with Ad-Hoc signature..."
             codesign --sign - --force --deep "$app"
           done
