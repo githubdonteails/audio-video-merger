@@ -43,14 +43,31 @@ jobs:
       - name: List Generated Files
         run: ls -R ./out/make
 
+      - name: Extract macOS Zip
+        if: matrix.os == 'macos-latest'
+        run: |
+          mkdir -p ./out/make/extracted
+          unzip ./out/make/zip/darwin/${{ matrix.arch }}/*.zip -d ./out/make/extracted
 
       - name: Ad-Hoc Sign macOS Application
         if: matrix.os == 'macos-latest'
         run: |
-          for app in ./out/make/darwin/${{ matrix.arch }}/*.app; do
+          for app in ./out/make/extracted/*.app; do
             echo "Signing $app with Ad-Hoc signature..."
             codesign --sign - --force --deep "$app"
           done
+
+      - name: Re-zip Signed macOS Application
+        if: matrix.os == 'macos-latest'
+        run: |
+          cd ./out/make/extracted
+          zip -r ../zip/darwin/${{ matrix.arch }}/AudioVideoMerger-darwin-arm64-2.0.0-signed.zip *.app
+
+
+      - name: Clean Up Extracted Files
+        if: matrix.os == 'macos-latest'
+        run: |
+          rm -rf ./out/make/extracted
 
       - name: Upload build files
         uses: actions/upload-artifact@v4
