@@ -18,7 +18,7 @@ jobs:
         exclude:
           - os: windows-latest
             arch: arm64
-          
+
     steps:
       - name: Checking out 
         uses: actions/checkout@v4
@@ -43,6 +43,15 @@ jobs:
       - name: List Generated Files
         run: ls -R ./out/make
 
+
+      - name: Ad-Hoc Sign macOS Application
+        if: matrix.os == 'macos-latest'
+        run: |
+          for app in ./out/make/zip/darwin/${{ matrix.arch }}/*.app; do
+            echo "Signing $app with Ad-Hoc signature..."
+            codesign --sign - --force --deep "$app"
+          done
+
       - name: Upload build files
         uses: actions/upload-artifact@v4
         with:
@@ -51,4 +60,3 @@ jobs:
             ./out/make/zip/darwin/${{ matrix.arch }}/*.zip
             ./out/make/zip/win32/${{ matrix.arch }}/*.zip
           compression-level: 9
-
