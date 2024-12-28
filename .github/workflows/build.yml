@@ -50,5 +50,5 @@ jobs:
           path: |
             ./out/make/zip/darwin/${{ matrix.arch }}/*.zip
             ./out/make/zip/win32/${{ matrix.arch }}/*.zip
-          compression-level: 0
+          compression-level: 9
 
